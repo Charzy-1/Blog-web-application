@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Charzy-1/Blog-web-application/issues"
   },
-  "homepage": "https://github.com/Charzy-1/Blog-web-application#readme"
+  "homepage": "https://github.com/Charzy-1/Blog-web-application#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  }
 }
