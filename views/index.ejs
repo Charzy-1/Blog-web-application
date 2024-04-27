@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog web app</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog Posts</title>
 </head>
 <body>
-    <h1>Welcome to Charzy’s Blog</h1>
-    <form action="/create-post" method="post">
-      <label for="post-title">Title:</label>
-      <input type="text" id="post-title" name="postTitle" required>
-      <br>
-      <label for="post-content">Content:</label>
-      <textarea name="postContent" id="post-content" required></textarea>
-      <br>
-      <button type="submit" id="publish-button">Publish</button>
-    </form>
+  <h1>My Blog Posts</h1>
+  <% if (posts.length > 0) { %>
+    <ul>
+      <% posts.forEach(post => { %>
+        <li>
+          <h2><%= post.title %></h2>
+          <p><%= post.content %></p>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No blog posts yet!</p>
+  <% } %>
 </body>
 </html>
