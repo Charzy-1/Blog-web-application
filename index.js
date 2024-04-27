@@ -9,7 +9,10 @@ const app = express();
 const port = 3000;
 
 // Database integration (replace with your actual database connection and logic)
-let posts = []; // Replace with database interaction
+let posts = [
+    { id: 1, title: "Post 1", content: "This is my first post" },
+    { id: 2, title: "Post 2", content: "This is my second post" },
+]; 
 
 app.use(express.static("public"));
 
@@ -30,13 +33,22 @@ app.post("/publish", (req, res) => {
 
 // Route to display the homepage
 app.get('/', (req, res) => {
-  // Replace with database logic to retrieve posts
-  res.render('index.ejs', { posts });
-});
+    // Replace with database logic to retrieve posts
+    res.render('posts.ejs', { posts }); // Render 'post.ejs' and pass 'posts'
+  });
+  
+// Route to handle post deletion
+app.delete('/posts/:id', (req, res) => {
+  const { id } = req.params;
+  const index = posts.findIndex(post => post.id === Number(id));
 
-// Route to display the post creation form
-app.get('/posts', (req, res) => {
-  res.render('posts.ejs'); // Assuming "posts.ejs" contains the form
+  if (index !== -1) {
+    posts.splice(index, 1); // Remove post from array
+  } else {
+    res.status(404).send('Post not found!'); // Handle non-existent post
+  }
+
+  res.redirect('/'); // Redirect to home page after deletion
 });
 
 app.listen(port, () => {

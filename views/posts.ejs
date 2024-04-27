@@ -7,7 +7,7 @@
 </head>
 <body>
   <h1>Create Post</h1>
-  
+
   <form action="/publish" method="post">
     <label for="post-title">Title:</label>
     <input type="text" id="post-title" name="title" required>
@@ -17,5 +17,25 @@
     <br>
     <button type="submit" id="publish-button">Publish Post</button>
   </form>
+
+  <% if (posts && posts.length > 0) { %>
+    <h2>Existing Posts</h2>
+    <% for (const post of posts) { %>
+      <div class="post">
+        <h3><%= post.title %></h3>
+        <p><%= post.content %></p>
+        <form method="DELETE" action="/posts/<%= post.id %>">
+          <input type="hidden" name="id" value="<%= post.id %>">
+          <button type="submit">Delete Post</button>
+        </form>
+        <form method="GET" action="/posts/<%= post.id %>/edit">  <input type="hidden" name="id" value="<%= post.id %>">
+          <button type="submit">Edit Post</button>
+        </form>
+      </div>
+    <% } %>
+  <% } else { %>
+    <p>No posts created yet.</p>
+  <% } %>
+
 </body>
 </html>
